@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse } from "axios";
+import Axios from "axios";
 import { Convert } from "./Convert";
 
 export interface SearchResponse {
