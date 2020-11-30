@@ -21,8 +21,9 @@ const Results: React.FC<ResultsProps> = ({ results }) => {
               boxShadow="2xl"
               bgColor={theme.colors.green[400]}
               borderRadius={8}
-              p={6}
               w="100%"
+              p={6}
+              key={result.id}
             >
               {result.value}
             </Box>
