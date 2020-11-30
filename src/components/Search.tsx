@@ -5,9 +5,11 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Search, SearchResult } from "../api/Search";
+import theme from "../theme";
 
 interface SearchBarProps {
   setResults: React.Dispatch<React.SetStateAction<SearchResult[]>>;
@@ -16,17 +18,19 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ setResults }) => {
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
     try {
       const resp = await Search(inputValue);
 
       setResults(resp.result);
     } catch (e) {
-      console.error(e);
+      setError("No results returned.");
     } finally {
       setLoading(false);
     }
@@ -61,6 +65,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResults }) => {
       >
         Search
       </Button>
+      <Text mt={4} color={theme.colors.red[400]}>
+        {error}
+      </Text>
     </Box>
   );
 };

@@ -11,7 +11,7 @@ const Results: React.FC<ResultsProps> = ({ results }) => {
   return (
     <Box w="100%" mt={4}>
       <Text fontWeight={600} textAlign="left">
-        {results.length} Results
+        {!!results.length && `${results.length} Results`}
       </Text>
 
       <VStack spacing={4} maxH="50vh" overflowY="scroll" mt={4}>
