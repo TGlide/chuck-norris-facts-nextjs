@@ -1,10 +1,10 @@
 import Container from "../components/Container";
 import DarkModeSwitch from "../components/DarkModeSwitch";
-import SearchBar from "../components/SearchBar";
+import Search from "../components/Search";
 
 const Index = () => (
   <Container height="100vh">
-    <SearchBar />
+    <Search />
     <DarkModeSwitch />
   </Container>
 );
