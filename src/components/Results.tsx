@@ -1,4 +1,4 @@
-import { Box, BoxProps, Text, VStack } from "@chakra-ui/react";
+import { Box, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import { SearchResult } from "../api/Search";
 import theme from "../theme";
