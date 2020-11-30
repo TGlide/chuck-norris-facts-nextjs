@@ -3,11 +3,11 @@ import { SearchResponse } from ".";
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-  public static toSearchResponse(json: string): SearchResponse {
+  static toSearchResponse(json: string): SearchResponse {
     return cast(JSON.parse(json), r("SearchResponse"));
   }
 
-  public static searchResponseToJson(value: SearchResponse): string {
+  static searchResponseToJson(value: SearchResponse): string {
     return JSON.stringify(uncast(value, r("SearchResponse")), null, 2);
   }
 }
