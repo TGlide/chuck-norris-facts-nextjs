@@ -1,3 +1,6 @@
+// file deepcode ignore UsageOfUndefinedReturnValue: used to terminate the function early
+// file deepcode ignore no-any: generic functions
+
 import { SearchResponse } from ".";
 
 // Converts JSON strings to/from your types
