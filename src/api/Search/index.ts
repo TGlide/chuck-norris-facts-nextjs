@@ -16,18 +16,19 @@ export interface SearchResult {
   value: string;
 }
 
-export async function Search(query: string): Promise<SearchResponse | Error> {
-  const { REACT_APP_CHUCK_NORRIS_API_URL } = process.env;
-  if (!REACT_APP_CHUCK_NORRIS_API_URL)
-    return new Error("Couldn't find the URL.");
+export async function Search(query: string): Promise<SearchResponse> {
+  const { NEXT_PUBLIC_CHUCK_NORRIS_API_URL } = process.env;
+
+  if (!NEXT_PUBLIC_CHUCK_NORRIS_API_URL)
+    throw new Error("Couldn't find the URL.");
 
   try {
     const response = await Axios.get(
-      `${REACT_APP_CHUCK_NORRIS_API_URL}search?query=${query}`
+      `${NEXT_PUBLIC_CHUCK_NORRIS_API_URL}jokes/search?query=${query}`
     );
 
-    return Convert.toSearchResponse(response.data);
+    return Convert.toSearchResponse(JSON.stringify(response.data));
   } catch (e) {
-    return new Error(e);
+    throw new Error(e);
   }
 }
