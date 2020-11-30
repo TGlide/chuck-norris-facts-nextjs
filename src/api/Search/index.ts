@@ -1,5 +1,4 @@
-import Axios from "axios";
-import { Convert } from "./Convert";
+import Axios, { AxiosResponse } from "axios";
 
 export interface SearchResponse {
   total: number;
@@ -8,10 +7,10 @@ export interface SearchResponse {
 
 export interface SearchResult {
   categories: string[];
-  created_at: Date;
+  created_at: string;
   icon_url: string;
   id: string;
-  updated_at: Date;
+  updated_at: string;
   url: string;
   value: string;
 }
@@ -23,11 +22,11 @@ export async function Search(query: string): Promise<SearchResponse> {
     throw new Error("Couldn't find the URL.");
 
   try {
-    const response = await Axios.get(
+    const response: AxiosResponse<SearchResponse> = await Axios.get(
       `${NEXT_PUBLIC_CHUCK_NORRIS_API_URL}jokes/search?query=${query}`
     );
 
-    return Convert.toSearchResponse(JSON.stringify(response.data));
+    return response.data;
   } catch (e) {
     throw new Error(e);
   }
