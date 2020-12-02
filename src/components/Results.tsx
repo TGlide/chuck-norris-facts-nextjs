@@ -1,9 +1,13 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Collapse,
+  Fade,
   Flex,
   HStack,
   IconButton,
+  Slide,
+  SlideFade,
   Text,
   useColorMode,
   VStack,
@@ -41,47 +45,58 @@ const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
         {!!results.length && `${results.length} Results`}
       </Text>
 
-      {!!results.length && (
-        <Box>
-          <VStack spacing={4} py={4} mt={4}>
-            {results
-              .slice(currentIndex, currentIndex + pageSize)
-              .map((result) => {
-                return (
-                  <Box
-                    boxShadow="base"
-                    bgColor={theme.colors.blue[isDark ? 300 : 100]}
-                    borderRadius={8}
-                    w="100%"
-                    p={6}
-                    key={result.id}
-                  >
-                    {result.value}
-                  </Box>
-                );
-              })}
-          </VStack>
-          <Flex justifyContent="flex-end">
-            <HStack spacing={4}>
-              <IconButton
-                disabled={currentIndex === 0}
-                onClick={() => setCurrentIndex(currentIndex - pageSize)}
-                aria-label="Previous Page"
-                icon={<ArrowLeftIcon />}
-              />
-              <Text>
-                {currentPage}/{numberOfPages}
-              </Text>
-              <IconButton
-                disabled={currentIndex + pageSize >= results.length}
-                onClick={() => setCurrentIndex(currentIndex + pageSize)}
-                aria-label="Next Page"
-                icon={<ArrowRightIcon />}
-              />
-            </HStack>
-          </Flex>
-        </Box>
-      )}
+      <Collapse in={!!results.length}>
+        <Flex
+          flexDirection="column"
+          justifyContent="space-between"
+          s
+          alignItems="flex-end"
+          minH={"60vh"}
+        >
+          {!!results.length && (
+            <>
+              <Fade in={true} key={currentIndex}>
+                <VStack spacing={4} w={"100%"} py={4} mt={4}>
+                  {results
+                    .slice(currentIndex, currentIndex + pageSize)
+                    .map((result) => {
+                      return (
+                        <Box
+                          boxShadow="base"
+                          bgColor={theme.colors.blue[isDark ? 300 : 100]}
+                          borderRadius={8}
+                          w="100%"
+                          p={6}
+                          key={result.id}
+                        >
+                          {result.value}
+                        </Box>
+                      );
+                    })}
+                </VStack>
+              </Fade>
+
+              <HStack spacing={4} p={1}>
+                <IconButton
+                  disabled={currentIndex === 0}
+                  onClick={() => setCurrentIndex(currentIndex - pageSize)}
+                  aria-label="Previous Page"
+                  icon={<ArrowLeftIcon />}
+                />
+                <Text>
+                  {currentPage}/{numberOfPages}
+                </Text>
+                <IconButton
+                  disabled={currentIndex + pageSize >= results.length}
+                  onClick={() => setCurrentIndex(currentIndex + pageSize)}
+                  aria-label="Next Page"
+                  icon={<ArrowRightIcon />}
+                />
+              </HStack>
+            </>
+          )}
+        </Flex>
+      </Collapse>
     </Box>
   );
 };

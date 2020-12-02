@@ -22,6 +22,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResults }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault();
+    setResults([]);
     setLoading(true);
     setError("");
 
@@ -29,6 +30,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResults }) => {
       const resp = await Search(inputValue);
 
       setResults(resp.result);
+      if (resp.total === 0) setError("No results returned.");
     } catch (e) {
       setError("No results returned.");
     } finally {

@@ -9,9 +9,9 @@ const Index = () => {
   const [results, setResults] = useState<SearchResult[]>([]);
 
   return (
-    <Container minH="100vh" py={8}>
+    <Container minH="100vh" pt={16} pb={8}>
       <Search setResults={setResults} />
-      <Results results={results} pageSize={4} />
+      <Results results={results} pageSize={3} />
       <DarkModeSwitch />
     </Container>
   );

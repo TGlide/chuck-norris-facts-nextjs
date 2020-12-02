@@ -10,7 +10,7 @@ const DarkModeSwitch = () => {
         aria-label="Toggle dark mode"
         onClick={toggleColorMode}
         icon={<MoonIcon />}
-        colorScheme="blue"
+        colorScheme="purple"
       />
     </Flex>
   );
