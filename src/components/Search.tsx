@@ -57,7 +57,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResults }) => {
         />
       </InputGroup>
       <Button
-        colorScheme="green"
+        colorScheme="blue"
         mt={4}
         type="submit"
         isLoading={loading}

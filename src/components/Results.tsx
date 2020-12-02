@@ -1,5 +1,13 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import { Box, Flex, HStack, IconButton, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  HStack,
+  IconButton,
+  Text,
+  useColorMode,
+  VStack,
+} from "@chakra-ui/react";
 import React, { useEffect, useState, useMemo } from "react";
 import { SearchResult } from "../api/Search";
 import theme from "../theme";
@@ -11,6 +19,8 @@ type ResultsProps = {
 
 const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
 
   const numberOfPages = useMemo(() => Math.ceil(results.length / pageSize), [
     results,
@@ -40,7 +50,7 @@ const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
                 return (
                   <Box
                     boxShadow="base"
-                    bgColor={theme.colors.green[400]}
+                    bgColor={theme.colors.blue[isDark ? 300 : 100]}
                     borderRadius={8}
                     w="100%"
                     p={6}
