@@ -1,4 +1,9 @@
-import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@chakra-ui/icons";
 import {
   Box,
   Collapse,
@@ -76,9 +81,15 @@ const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
               <HStack spacing={4} p={1}>
                 <IconButton
                   disabled={currentIndex === 0}
+                  onClick={() => setCurrentIndex(0)}
+                  aria-label="First Page"
+                  icon={<ArrowLeftIcon />}
+                />
+                <IconButton
+                  disabled={currentIndex === 0}
                   onClick={() => setCurrentIndex(currentIndex - pageSize)}
                   aria-label="Previous Page"
-                  icon={<ArrowLeftIcon />}
+                  icon={<ChevronLeftIcon w={8} h={8} />}
                 />
                 <Text>
                   {currentPage}/{numberOfPages}
@@ -87,6 +98,14 @@ const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
                   disabled={currentIndex + pageSize >= results.length}
                   onClick={() => setCurrentIndex(currentIndex + pageSize)}
                   aria-label="Next Page"
+                  icon={<ChevronRightIcon w={8} h={8} />}
+                />
+                <IconButton
+                  disabled={currentIndex + pageSize >= results.length}
+                  onClick={() =>
+                    setCurrentIndex((numberOfPages - 1) * pageSize)
+                  }
+                  aria-label="Last Page"
                   icon={<ArrowRightIcon />}
                 />
               </HStack>
