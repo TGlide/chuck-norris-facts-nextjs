@@ -10,7 +10,7 @@ const Index = () => {
   const [results, setResults] = useState<SearchResult[]>([]);
 
   return (
-    <Container minH="100vh" pt={16} pb={8}>
+    <Container minH="100vh" pt={12} pb={8}>
       <Header />
       <Search setResults={setResults} />
       <Results results={results} pageSize={3} />
