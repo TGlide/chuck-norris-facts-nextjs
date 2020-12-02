@@ -17,7 +17,11 @@ const Header = (props: FlexProps) => {
 
   return (
     <Flex justifyContent="center" alignItems="center" {...props}>
-      <Image src="chuck.png" boxSize={isLargerThan440px ? "5rem" : "4rem"} />
+      <Image
+        src="chuck.png"
+        boxSize={isLargerThan440px ? "5rem" : "4rem"}
+        alt="Too much to handle"
+      />
       <Text
         color={isDark ? theme.colors.white : theme.colors.gray[700]}
         fontFamily={theme.fonts.header}
