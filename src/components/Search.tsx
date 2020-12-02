@@ -46,6 +46,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResults }) => {
       justifyContent="center"
       alignItems="center"
       width="100%"
+      mt={4}
       onSubmit={handleSubmit}
     >
       <InputGroup>
@@ -59,7 +60,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResults }) => {
         />
       </InputGroup>
       <Button
-        colorScheme="blue"
+        colorScheme="orange"
         mt={4}
         type="submit"
         isLoading={loading}

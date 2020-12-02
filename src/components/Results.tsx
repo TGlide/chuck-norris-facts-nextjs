@@ -6,13 +6,11 @@ import {
   Flex,
   HStack,
   IconButton,
-  Slide,
-  SlideFade,
   Text,
   useColorMode,
   VStack,
 } from "@chakra-ui/react";
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { SearchResult } from "../api/Search";
 import theme from "../theme";
 
@@ -62,8 +60,7 @@ const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
                     .map((result) => {
                       return (
                         <Box
-                          boxShadow="base"
-                          bgColor={theme.colors.blue[isDark ? 300 : 100]}
+                          bgColor={theme.colors.orange[isDark ? 300 : 100]}
                           borderRadius={8}
                           w="100%"
                           p={6}

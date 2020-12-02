@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SearchResult } from "../api/Search";
 import Container from "../components/Container";
 import DarkModeSwitch from "../components/DarkModeSwitch";
+import Header from "../components/Header";
 import Results from "../components/Results";
 import Search from "../components/Search";
 
@@ -10,6 +11,7 @@ const Index = () => {
 
   return (
     <Container minH="100vh" pt={16} pb={8}>
+      <Header />
       <Search setResults={setResults} />
       <Results results={results} pageSize={3} />
       <DarkModeSwitch />
