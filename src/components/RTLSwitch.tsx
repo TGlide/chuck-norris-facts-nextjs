@@ -13,7 +13,7 @@ const RTLSwitch = () => {
         px={3}
         onClick={() => toggleRtl()}
       >
-        <Text fontWeight={400} textTransform="uppercase">
+        <Text fontWeight={400} textTransform="uppercase" data-testid="rtl-dir">
           {isRtl ? "ltr" : "rtl"}
         </Text>
       </Button>

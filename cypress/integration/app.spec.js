@@ -1,6 +1,8 @@
+const location = "http://localhost:3000";
+
 describe("App Test", () => {
   it("Search button should be disabled", () => {
-    cy.visit("http://localhost:3000");
+    cy.visit(location);
     cy.get("button[data-testid='search']").should("be.disabled");
   });
 
@@ -94,5 +96,13 @@ describe("App Test", () => {
     cy.get("[data-testid='sun']").click();
     cy.get("[data-testid='sun']").should("not.exist");
     cy.get("[data-testid='moon']");
+  });
+
+  it("Direction should be ltr", () => {
+    cy.get("[data-testid='rtl-dir']").should("have.text", "rtl");
+  });
+
+  it("Should be able to set rtl direction", () => {
+    cy.get("[data-testid='rtl-dir']").click().should("have.text", "ltr");
   });
 });
