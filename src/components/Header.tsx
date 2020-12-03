@@ -1,11 +1,4 @@
-import {
-  Flex,
-  FlexProps,
-  Image,
-  Text,
-  useColorMode,
-  useMediaQuery,
-} from "@chakra-ui/react";
+import { Flex, FlexProps, Image, Text, useColorMode } from "@chakra-ui/react";
 import React from "react";
 import theme from "../theme";
 
