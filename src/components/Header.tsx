@@ -11,7 +11,6 @@ import theme from "../theme";
 
 const Header = (props: FlexProps) => {
   const { colorMode } = useColorMode();
-  const [isLargerThan440px] = useMediaQuery("(min-width: 440px)");
 
   const isDark = colorMode === "dark";
 
@@ -19,14 +18,14 @@ const Header = (props: FlexProps) => {
     <Flex justifyContent="center" alignItems="center" {...props}>
       <Image
         src="chuck.png"
-        boxSize={isLargerThan440px ? "5rem" : "4rem"}
+        boxSize={{ base: "4rem", sm: "5rem" }}
         alt="Too much to handle"
       />
       <Text
         color={isDark ? theme.colors.white : theme.colors.gray[700]}
         fontFamily={theme.fonts.header}
         fontWeight={600}
-        fontSize={isLargerThan440px ? "2rem" : "1.35rem"}
+        fontSize={{ base: "1.35rem", sm: "2rem" }}
         ml={4}
       >
         Chuck Norris Facts
