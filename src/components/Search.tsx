@@ -24,11 +24,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResults }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLDivElement>) => {
-    e.preventDefault();
+  const handleReset = () => {
     setResults([]);
     setLoading(true);
     setError("");
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLDivElement>) => {
+    e.preventDefault(); // Prevents window reloading
+    handleReset();
 
     try {
       const resp = await Search(inputValue);
