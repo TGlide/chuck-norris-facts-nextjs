@@ -52,14 +52,19 @@ const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
         <Flex
           flexDirection="column"
           justifyContent="space-between"
-          s
           alignItems="flex-end"
           minH={"60vh"}
         >
           {!!results.length && (
             <>
               <Fade in={true} key={currentIndex}>
-                <VStack spacing={4} w={"100%"} py={4} mt={4}>
+                <VStack
+                  spacing={4}
+                  w={"100%"}
+                  py={4}
+                  mt={4}
+                  data-testid="results-stack"
+                >
                   {results
                     .slice(currentIndex, currentIndex + pageSize)
                     .map((result) => {
@@ -84,14 +89,16 @@ const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
                   onClick={() => setCurrentIndex(0)}
                   aria-label="First Page"
                   icon={<ArrowLeftIcon />}
+                  data-testid="first-btn"
                 />
                 <IconButton
                   disabled={currentIndex === 0}
                   onClick={() => setCurrentIndex(currentIndex - pageSize)}
                   aria-label="Previous Page"
                   icon={<ChevronLeftIcon w={8} h={8} />}
+                  data-testid="previous-btn"
                 />
-                <Text>
+                <Text data-testid="page-indicator">
                   {currentPage}/{numberOfPages}
                 </Text>
                 <IconButton
@@ -99,6 +106,7 @@ const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
                   onClick={() => setCurrentIndex(currentIndex + pageSize)}
                   aria-label="Next Page"
                   icon={<ChevronRightIcon w={8} h={8} />}
+                  data-testid="next-btn"
                 />
                 <IconButton
                   disabled={currentIndex + pageSize >= results.length}
@@ -107,6 +115,7 @@ const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
                   }
                   aria-label="Last Page"
                   icon={<ArrowRightIcon />}
+                  data-testid="last-btn"
                 />
               </HStack>
             </>

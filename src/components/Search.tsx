@@ -65,12 +65,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResults }) => {
         type="submit"
         isLoading={loading}
         disabled={!inputValue.length}
+        data-testid="search"
       >
         Search
       </Button>
-      <Text mt={4} color={theme.colors.red[400]}>
-        {error}
-      </Text>
+      {!!error.length && (
+        <Text mt={4} color={theme.colors.red[400]} data-testid="search-error">
+          {error}
+        </Text>
+      )}
     </Box>
   );
 };
