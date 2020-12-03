@@ -1,14 +1,21 @@
 import { Flex, FlexProps, Image, Text, useColorMode } from "@chakra-ui/react";
 import React from "react";
+import { useStoreState } from "../store";
 import theme from "../theme";
 
 const Header = (props: FlexProps) => {
+  const isRtl = useStoreState((state) => state.rtl.enabled);
   const { colorMode } = useColorMode();
 
   const isDark = colorMode === "dark";
 
   return (
-    <Flex justifyContent="center" alignItems="center" {...props}>
+    <Flex
+      flexDirection={isRtl ? "row-reverse" : "row"}
+      justifyContent="center"
+      alignItems="center"
+      {...props}
+    >
       <Image
         src="chuck.png"
         boxSize={{ base: "4rem", sm: "5rem" }}
@@ -19,7 +26,8 @@ const Header = (props: FlexProps) => {
         fontFamily={theme.fonts.header}
         fontWeight={600}
         fontSize={{ base: "1.35rem", sm: "2rem" }}
-        ml={4}
+        ml={isRtl ? 0 : 4}
+        mr={isRtl ? 4 : 0}
       >
         Chuck Norris Facts
       </Text>

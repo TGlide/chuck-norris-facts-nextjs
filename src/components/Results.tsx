@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useMemo, useState } from "react";
 import { SearchResult } from "../api/Search";
+import { useStoreState } from "../store";
 import theme from "../theme";
 
 type ResultsProps = {
@@ -25,6 +26,8 @@ type ResultsProps = {
 };
 
 const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
+  const isRtl = useStoreState((state) => state.rtl.enabled);
+  const rtlDirection = useStoreState((state) => state.rtl.direction);
   const [currentIndex, setCurrentIndex] = useState(0);
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
@@ -44,7 +47,11 @@ const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
 
   return (
     <Box w="100%" pos="relative" mt={4}>
-      <Text fontWeight={600} textAlign="left">
+      <Text
+        dir={rtlDirection}
+        fontWeight={600}
+        textAlign={isRtl ? "right" : "left"}
+      >
         {!!results.length && `${results.length} Results`}
       </Text>
 
@@ -70,6 +77,7 @@ const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
                     .map((result) => {
                       return (
                         <Box
+                          dir={rtlDirection}
                           bgColor={theme.colors.orange[isDark ? 300 : 100]}
                           borderRadius={8}
                           w="100%"
@@ -98,8 +106,9 @@ const Results: React.FC<ResultsProps> = ({ results, pageSize = 5 }) => {
                   icon={<ChevronLeftIcon w={8} h={8} />}
                   data-testid="previous-btn"
                 />
-                <Text data-testid="page-indicator">
-                  {currentPage}/{numberOfPages}
+                <Text dir={rtlDirection} data-testid="page-indicator">
+                  {isRtl ? numberOfPages : currentPage}/
+                  {isRtl ? currentPage : numberOfPages}
                 </Text>
                 <IconButton
                   disabled={currentIndex + pageSize >= results.length}

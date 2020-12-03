@@ -5,10 +5,12 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Search, SearchResult } from "../api/Search";
+import { useStoreState } from "../store";
 import theme from "../theme";
 
 interface SearchBarProps {
@@ -16,6 +18,8 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ setResults }) => {
+  const isRtl = useStoreState((state) => state.rtl.enabled);
+  const rtlDirection = useStoreState((state) => state.rtl.direction);
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -50,14 +54,22 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResults }) => {
       onSubmit={handleSubmit}
     >
       <InputGroup>
-        <InputLeftElement pointerEvents="none">
-          <SearchIcon />
-        </InputLeftElement>
+        {!isRtl && (
+          <InputLeftElement pointerEvents="none">
+            <SearchIcon />
+          </InputLeftElement>
+        )}
         <Input
+          dir={rtlDirection}
           placeholder="Search for Chuck Norris facts..."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
+        {isRtl && (
+          <InputRightElement pointerEvents="none">
+            <SearchIcon />
+          </InputRightElement>
+        )}
       </InputGroup>
       <Button
         colorScheme="orange"
@@ -70,7 +82,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResults }) => {
         Search
       </Button>
       {!!error.length && (
-        <Text mt={4} color={theme.colors.red[400]} data-testid="search-error">
+        <Text
+          dir={rtlDirection}
+          mt={4}
+          color={theme.colors.red[400]}
+          data-testid="search-error"
+        >
           {error}
         </Text>
       )}
